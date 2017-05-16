@@ -1,0 +1,49 @@
+cpp_quote("/* Odin: The Talisker nanokernel */");
+cpp_quote("");
+cpp_quote("/* Copyright 2017 Mo McRoberts.");
+cpp_quote(" *");
+cpp_quote(" *  Licensed under the Apache License, Version 2.0 (the \"License\");");
+cpp_quote(" *  you may not use this file except in compliance with the License.");
+cpp_quote(" *  You may obtain a copy of the License at");
+cpp_quote(" *");
+cpp_quote(" *      http://www.apache.org/licenses/LICENSE-2.0");
+cpp_quote(" *");
+cpp_quote(" *  Unless required by applicable law or agreed to in writing, software");
+cpp_quote(" *  distributed under the License is distributed on an \"AS IS\" BASIS,");
+cpp_quote(" *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.");
+cpp_quote(" *  See the License for the specific language governing permissions and");
+cpp_quote(" *  limitations under the License.");
+cpp_quote(" */");
+cpp_quote("");
+cpp_quote("#ifndef __cplusplus");
+cpp_quote("# include <stdbool.h>");
+cpp_quote("#endif");
+cpp_quote("#include <sys/types.h>");
+cpp_quote("#include <uuid/uuid.h>");
+cpp_quote("#include \"Odin/_decl.h\"");
+
+[
+	pointer_default(unique),
+	cheader("Odin/Errors.h")
+]
+interface Errors
+{
+	const int E_SUCCESS = 0;
+	
+	/* Operation not permitted */
+	const int E_PERM = 1;
+	/* Access denied */
+	const int E_ACCESS = 2;
+	/* Out of memory */
+	const int E_NOMEM = 3;
+	/* I/O error */
+	const int E_IO = 4;
+	/* Object or interface does not exist */
+	const int E_NOENT = 5;
+	
+	/* User errors must be lower than this value */
+	const int E_USER = 255;
+	
+	/* User error codes must not exceed this value */
+	const int E_MAX = 4095;
+}
