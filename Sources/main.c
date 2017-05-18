@@ -43,7 +43,7 @@ main(int argc, char **argv, char **envp)
 	{
 		/* We've failed to obtain a console from the kernel. This is hard
 		 * error - even if no console device was available, Odin should still
-		 * provider an interface pointer from a no-op implementation.
+		 * provide an IConsole interface to a no-op implementation.
 		 */
 		IMutableKernel_release(odin);
 		return 2;
@@ -67,8 +67,9 @@ main(int argc, char **argv, char **envp)
 	{
 		IMutableKernel_panic(odin, "failed to create initial task's main thread\n");
 		IConsole_release(console);
-		IMutableKernel_panic(odin, "failed to create initial kernel task\n");
+		IMutableTask_release(task);
 		IMutableKernel_release(odin);
+		return 4;
 	}
 	/* Set the new thread's initial state (in particular the entry-point) */
 	/* Create an object descriptor for the console within this task */
@@ -78,7 +79,13 @@ main(int argc, char **argv, char **envp)
 		/* If the (numeric) returned object descriptor is negative,
 		 * the call failed.
 		 */
-		IConsole_puts(console, "failed to obtain an object descriptor for the console in the initial task\n");
+		
+		IMutableKernel_panic(odin, "failed to obtain an object descriptor for the console in the initial task\n");
+		IConsole_release(console);
+		IMutableThread_release(thread);
+		IMutableTask_release(task);
+		IMutableKernel_release(odin);
+		return 5;
 	}
 	/* Pass control to the task's initial thread, which will spawn the Startup
 	 * app and then loop forever.
@@ -87,7 +94,10 @@ main(int argc, char **argv, char **envp)
 	/* If control is returned here, trigger a systemwide exception - it
 	 * means the (supposedly-unkillable) executive task has died.
 	 */
+	IMutableThread_release(thread);
+	IMutableTask_release(task);
 	IConsole_release(console);
+	IMutableKernel_release(odin);
 	
 	return 127;
 }
