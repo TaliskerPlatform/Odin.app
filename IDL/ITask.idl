@@ -15,7 +15,7 @@ cpp_quote(" *  See the License for the specific language governing permissions a
 cpp_quote(" *  limitations under the License.");
 cpp_quote(" */");
 
-import "IObject.idl";
+import "ISupports.idl";
 
 [
 	object,
@@ -23,11 +23,12 @@ import "IObject.idl";
 	pointer_default(unique),
 	cheader("Odin/ITask.h")
 ]
-interface ITask: IObject
+interface ITask: ISupports
 {
 	cpp_quote("#ifndef W_NO_UNSTABLE_INTERFACES");
 	cpp_quote("# warning The ITask interface is currently considered unstable; source and binary compatibility is not assured.");
 	cpp_quote("#endif");
 	
-	int *personality([in] const uuid_t riid, [out,iid_is(riid)] void **inst);
+	/* Retrieve a currently-supported subsystem interface pointer */
+	int subsystem([in] const uuid_t riid, [out,iid_is(riid)] void **inst);
 }

@@ -71,8 +71,11 @@ int odin_console_create(IKernel *kernel, IConsole **console);
 /* Memory Manager */
 int odin_mm_create(IKernel *kernel, IMemoryManager **mm);
 
-/* Default allocator */
+/* (Heap) allocator */
 int odin_alloc_create(IKernel *kernel, IAllocator **alloc);
+
+/* Tasks */
+int odin_task_create(IKernel *kernel, IMutableTask **task);
 
 /* Devices */
 int odin_hostcon_create(IKernel *kernel, IConsole **console);

@@ -79,7 +79,7 @@ odin(IKernel **ptr)
 {
 	odin_init_();
 	*ptr = &odin_global.kernel;
-	return 0;
+	return E_SUCCESS;
 }
 
 /* Obtain the global kernel state as a mutable object */
@@ -88,7 +88,7 @@ odin_mutable(IMutableKernel **ptr)
 {
 	odin_init_();
 	*ptr = &odin_global.mutablekernel;
-	return 0;	
+	return E_SUCCESS;	
 }
 
 static int
@@ -98,7 +98,7 @@ odin_init_(void)
 	odin_mm_create(&(odin_global.kernel), &(odin_global.data.mm));
 	odin_alloc_create(&(odin_global.kernel), &(odin_global.data.allocator));
 	odin_console_create(&(odin_global.kernel), &(odin_global.data.console));
-	return 0;
+	return E_SUCCESS;
 }
 
 static int
@@ -145,9 +145,13 @@ odin_allocator_(IMutableKernel *kernel, IAllocator **allocator)
 {
 	Odin *me = INTF_TO_CLASS(kernel);
 
+	if(!me->data.allocator)
+	{
+		return -E_NOENT;
+	}
 	IAllocator_retain(me->data.allocator);
 	*allocator = me->data.allocator;
-	return 0;
+	return E_SUCCESS;
 }
 
 static int 
@@ -155,9 +159,13 @@ odin_mm_(IMutableKernel *kernel, IMemoryManager **mm)
 {
 	Odin *me = INTF_TO_CLASS(kernel);
 
+	if(!me->data.mm)
+	{
+		return -E_NOENT;
+	}
 	IMemoryManager_retain(me->data.mm);
 	*mm = me->data.mm;
-	return 0;
+	return E_SUCCESS;
 }
 
 static int
@@ -174,7 +182,7 @@ odin_panic_(IMutableKernel *kernel, const char *message)
 	for(;;) { }
 	/* not reached */
 
-	return 0;
+	return E_SUCCESS;
 }
 
 static int
@@ -184,19 +192,17 @@ odin_console_(IMutableKernel *kernel, IConsole **console)
 	
 	if(!me->data.console)
 	{
-		return -1;
+		return -E_NOENT;
 	}
 	IConsole_retain(me->data.console);
 	*console = me->data.console;
-	return 0;
+	return E_SUCCESS;
 }
 
 static int
 odin_createtask_(IMutableKernel *kernel, IMutableTask **task)
 {
-	(void) kernel;
-	(void) task;
+	Odin *me = INTF_TO_CLASS(kernel);
 	
-	/* We don't know how to do this yet */
-	return -1;
+	return odin_task_create(&(me->kernel), task);
 }

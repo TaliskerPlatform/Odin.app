@@ -30,6 +30,11 @@ interface IMutableTask: ITask
 	cpp_quote("# warning The IMutableTask interface is currently considered unstable; source and binary compatibility is not assured.");
 	cpp_quote("#endif");
 	
+	/* Create a new (suspended) thread on the task */
 	int createThread([out] IMutableThread **thread);
+	
+	/* Obtain - creating one if needed - a descriptor in this task for a
+	 * particular object
+	 */
 	int descriptorFor([in, iid_is(iid)] void *object, [in] const uuid_t iid);
 }

@@ -44,14 +44,18 @@ DECLARE_INTERFACE_(IMutableTask, ITask)
 
 # if !defined(__cplusplus)
 # if !defined(__cplusplus)
+# if !defined(__cplusplus)
 	/* IObject */
 	STDMETHOD_(int, queryInterface)(THIS_ const uuid_t riid, void **object) PURE;
 	STDMETHOD_(int32_t, retain)(THIS) PURE;
 	STDMETHOD_(int32_t, release)(THIS) PURE;
 # endif /*!__cplusplus*/
 
+	/* ISupports */
+# endif /*!__cplusplus*/
+
 	/* ITask */
-	STDMETHOD_(int*, personality)(THIS_ const uuid_t riid, void **inst) PURE;
+	STDMETHOD_(int, subsystem)(THIS_ const uuid_t riid, void **inst) PURE;
 # endif /*!__cplusplus*/
 
 	/* IMutableTask */
@@ -65,7 +69,7 @@ DECLARE_INTERFACE_(IMutableTask, ITask)
 #   define IMutableTask_queryInterface(__this, riid, object) __this->lpVtbl->queryInterface(__this, riid, object)
 #   define IMutableTask_retain(__this) __this->lpVtbl->retain(__this)
 #   define IMutableTask_release(__this) __this->lpVtbl->release(__this)
-#   define IMutableTask_personality(__this, riid, inst) __this->lpVtbl->personality(__this, riid, inst)
+#   define IMutableTask_subsystem(__this, riid, inst) __this->lpVtbl->subsystem(__this, riid, inst)
 #   define IMutableTask_createThread(__this, thread) __this->lpVtbl->createThread(__this, thread)
 #   define IMutableTask_descriptorFor(__this, object, iid) __this->lpVtbl->descriptorFor(__this, object, iid)
 #  endif /*!__cplusplus*/
