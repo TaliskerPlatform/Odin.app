@@ -251,9 +251,7 @@ Classically, clients of COM objects are only aware of the interfaces that they k
 
 Because instances within the namespace are essentially advertising themselves, they also a need a mechanism to advertise what they *are*—or rather, what interfaces they support.
 
-To do this, objects can expose the `IAdvertisedInterfaces` interface, which provides a single method, `supports()`, which a client can use to query an instance for what *other* interfaces it supports (or at least those which it is willing to advertise the availability of).
-
-
+To do this, objects can expose the `ISupports` interface, which provides a single method, `supports()`, which a client can use to query an instance for what *other* interfaces it supports (or at least those which it is willing to advertise the availability of).
 
 ### Interpreters
 
@@ -307,7 +305,10 @@ If Odin is running in user-space on a host operating system, a “host console�
 
 ##### ELF interpreter
 
-The ELF interpreter provides a 
+The ELF interpreter provides a loader capable of presenting an `IExecutable` interface to any ELF executable for a supported architecture and ABI that is accessible as a executable `IFile`.
+
+Unlike other interpreter classes, the ELF interpreter is compiled in to Odin on most systems, and so the initial set of tasks which are launched at system start-up (prior to interpreters for any other executable formats being launched) must also be ELF binaries.
+
 ## Building from source
 
 ## Running Odin
