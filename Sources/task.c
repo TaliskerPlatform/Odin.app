@@ -109,6 +109,9 @@ odin_task_create(IKernel *kernel, IMutableTask **task)
 	}
 	IKernel_retain(kernel);
 	*task = &(p->mutabletask);
+	
+	/* TODO: add task to object namespace */
+	
 	return E_SUCCESS;
 }
 
@@ -222,11 +225,17 @@ static int
 odin_task_createthread_(IMutableTask *self, IMutableThread **newthread)
 {
 	Task *me = INTF_TO_CLASS(self);
-
-	(void) me;
-	(void) newthread;
+	int r;
 	
-	return -E_NOMEM;
+	if((r = odin_thread_create(self, me->data.kernel, newthread)))
+	{
+		return r;
+	}
+	
+	/* TODO: add thread to task's list */
+	/* TODO: add thread to object namespace */
+	
+	return E_SUCCESS;
 }
 
 static int

@@ -77,6 +77,9 @@ int odin_alloc_create(IKernel *kernel, IAllocator **alloc);
 /* Tasks */
 int odin_task_create(IKernel *kernel, IMutableTask **task);
 
+/* Threads */
+int odin_thread_create(IMutableTask *task, IKernel *kernel, IMutableThread **thread);
+
 /* Devices */
 int odin_hostcon_create(IKernel *kernel, IConsole **console);
 

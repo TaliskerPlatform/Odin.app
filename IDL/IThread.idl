@@ -15,13 +15,13 @@ cpp_quote(" *  See the License for the specific language governing permissions a
 cpp_quote(" *  limitations under the License.");
 cpp_quote(" */");
 
-import "IObject.idl";
+import "ISupports.idl";
 
 [
 	object,
 	uuid(50740873-d5a9-4103-9d64-8148f461e866),
 	pointer_default(unique),
-	cheader("Odin/IThread.h")
+	cheader("Odin/ISupports.h")
 ]
 interface IThread: IObject
 {
