@@ -37,15 +37,19 @@ typedef struct IThread IThread;
 #  define INTERFACE IThread
 
 
-DECLARE_INTERFACE_(IThread, IObject)
+DECLARE_INTERFACE_(IThread, ISupports)
 {
 	BEGIN_INTERFACE
 
+# if !defined(__cplusplus)
 # if !defined(__cplusplus)
 	/* IObject */
 	STDMETHOD_(int, queryInterface)(THIS_ const uuid_t riid, void **object) PURE;
 	STDMETHOD_(int32_t, retain)(THIS) PURE;
 	STDMETHOD_(int32_t, release)(THIS) PURE;
+# endif /*!__cplusplus*/
+
+	/* ISupports */
 # endif /*!__cplusplus*/
 
 	/* IThread */

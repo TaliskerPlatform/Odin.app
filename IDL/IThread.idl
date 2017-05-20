@@ -21,9 +21,9 @@ import "ISupports.idl";
 	object,
 	uuid(50740873-d5a9-4103-9d64-8148f461e866),
 	pointer_default(unique),
-	cheader("Odin/ISupports.h")
+	cheader("Odin/IThread.h")
 ]
-interface IThread: IObject
+interface IThread: ISupports
 {
 	cpp_quote("#ifndef W_NO_UNSTABLE_INTERFACES");
 	cpp_quote("# warning The IThread interface is currently considered unstable; source and binary compatibility is not assured.");
