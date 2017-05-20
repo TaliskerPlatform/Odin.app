@@ -58,6 +58,7 @@ DECLARE_INTERFACE_(IMutableThread, IThread)
 
 	/* IMutableThread */
 	STDMETHOD_(int, resume)(THIS) PURE;
+	STDMETHOD_(int, despatch)(THIS_ int od, int mid, int r1, int r2, int r3, int r4, int r5, int r6) PURE;
 
 	END_INTERFACE
 };
@@ -67,6 +68,7 @@ DECLARE_INTERFACE_(IMutableThread, IThread)
 #   define IMutableThread_retain(__this) __this->lpVtbl->retain(__this)
 #   define IMutableThread_release(__this) __this->lpVtbl->release(__this)
 #   define IMutableThread_resume(__this) __this->lpVtbl->resume(__this)
+#   define IMutableThread_despatch(__this, od, mid, r1, r2, r3, r4, r5, r6) __this->lpVtbl->despatch(__this, od, mid, r1, r2, r3, r4, r5, r6)
 #  endif /*!__cplusplus*/
 #  undef INTERFACE
 # endif /*!__IMutableThread_INTERFACE_DEFINED__*/

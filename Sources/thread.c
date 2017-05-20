@@ -69,12 +69,14 @@ static int32_t odin_thread_release_(IMutableThread *self);
 /* IMutableThread */
 
 static int odin_thread_resume_(IMutableThread *self);
+static int odin_thread_despatch_(IMutableThread *self, int od, int mid, int r1, int r2, int r3, int r4, int r5, int r6);
 
 static struct IMutableThread_vtable_ odin_thread_vtable_ = {
 	odin_thread_queryinterface_,
 	odin_thread_retain_,
 	odin_thread_release_,
 	odin_thread_resume_,
+	odin_thread_despatch_
 };
 
 int
@@ -210,5 +212,24 @@ odin_thread_resume_(IMutableThread *self)
 
 	(void) me;
 	
-	return 0;
+	return E_SUCCESS;
 }
+
+static int
+odin_thread_despatch_(IMutableThread *self, int od, int mid, int r1, int r2, int r3, int r4, int r5, int r6)
+{
+	Thread *me = INTF_TO_CLASS(self);
+
+	(void) me;
+	(void) od;
+	(void) mid;
+	(void) r1;
+	(void) r2;
+	(void) r3;
+	(void) r4;
+	(void) r5;
+	(void) r6;
+	
+	return -E_PERM;
+}
+

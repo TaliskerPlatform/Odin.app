@@ -28,6 +28,14 @@ interface IMutableThread: IThread
 	cpp_quote("#ifndef W_NO_UNSTABLE_INTERFACES");
 	cpp_quote("# warning The IMutableThread interface is currently considered unstable; source and binary compatibility is not assured.");
 	cpp_quote("#endif");
-	
+
+	/* Resume scheduling of this thread */
 	int resume();
+
+	/* Despatch a call to method index <mid> to the interface identified by
+	 * object descriptor <od>, marshaling <r1>..<r6> as parameters.
+	 *
+	 * This is the kernel side of the RPC marshaling process.
+	 */
+	[local] int despatch(int od, int mid, int r1, int r2, int r3, int r4, int r5, int r6);
 }
