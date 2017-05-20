@@ -325,6 +325,8 @@ Odin is intended to be small, portable and extensible enough to be able to form 
 
 Copyright © 2017 Mo McRoberts.
 
+[`BuildScripts/get-version.sh`](BuildScripts/get-version.sh) is also Copyright © 2014 BBC.
+
 Licensed under the terms of the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 [travis]: https://img.shields.io/travis/TaliskerPlatform/Odin.app.svg

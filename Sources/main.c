@@ -48,7 +48,7 @@ main(int argc, char **argv, char **envp)
 		IMutableKernel_release(odin);
 		return 2;
 	}
-	IConsole_puts(console, "Talisker " PACKAGE_NAME PACKAGE_RELEASE " Version " PACKAGE_VERSTR "-" PACKAGE_PLATSTR "\n");
+	IConsole_puts(console, "Talisker " PACKAGE_NAME PACKAGE_RELSTR " Version " PACKAGE_VERSTR "-" PACKAGE_PLATSTR "\n");
 	IConsole_puts(console, PACKAGE_COPYRIGHT_NOTICE);
 	IConsole_puts(console, "\n");
 	

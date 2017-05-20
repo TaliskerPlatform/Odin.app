@@ -38,7 +38,7 @@
 # include "Odin/IMutableThread.h"
 
 # ifdef PACKAGE_RELEASE
-#  define PACKAGE_RELSTR               " Release" PACKAGE_RELEASE
+#  define PACKAGE_RELSTR               " \"" PACKAGE_RELEASE "\""
 # endif
 
 # ifndef PACKAGE_RELEASE
@@ -49,7 +49,7 @@
 # ifdef HOST_TYPE_FREESTANDING
 #  define PACKAGE_PLATSTR              HOST_FAMILY
 # else
-#  define PACKAGE_PLATSTR              HOST_PLATFORM "_" HOST_FAMILY
+#  define PACKAGE_PLATSTR              HOST_FAMILY " (" HOST_PLATFORM ")"
 # endif
 
 # ifdef PACKAGE_CONFIG_NAME

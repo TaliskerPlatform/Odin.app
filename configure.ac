@@ -14,7 +14,8 @@
 ##  See the License for the specific language governing permissions and
 ##  limitations under the License.
 
-AC_INIT([Odin],[develop])
+AC_INIT([Odin],m4_esyscmd([/bin/sh BuildScripts/get-version.sh]),,,[https://github.com/TaliskerPlatform/Odin.app])
+AC_DEFINE_UNQUOTED([PACKAGE_RELEASE], ["Blaven"], [The name of the current release])
 
 AC_CONFIG_MACRO_DIR([M4])
 AC_CONFIG_AUX_DIR([BuildScripts])
