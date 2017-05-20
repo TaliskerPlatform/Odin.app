@@ -14,12 +14,4 @@
 ##  See the License for the specific language governing permissions and
 ##  limitations under the License.
 
-dist_noinst_DATA = Interfaces.idl Errors.idl \
-	IObject.idl IFactory.idl ISupports.idl \
-	ITask.idl IMutableTask.idl \
-	IThread.idl IMutableThread.idl \
-	IVariant.idl IArray.idl IDictionary.idl IString.idl \
-	IKernel.idl IMutableKernel.idl \
-	IAllocator.idl \
-	IMemoryManager.idl \
-	IConsole.idl
+SUBDIRS = Odin

@@ -14,21 +14,12 @@
 ##  See the License for the specific language governing permissions and
 ##  limitations under the License.
 
-idlgenerated = Interfaces.h Errors.h \
-	IObject.h IFactory.h ISupports.h \
-	ITask.h IMutableTask.h \
-	IThread.h IMutableThread.h \
-	IVariant.h IArray.h IDictionary.h IString.h \
-	IKernel.h IMutableKernel.h \
-	IAllocator.h \
-	IMemoryManager.h \
-	IConsole.h
-
-odindir = $(includedir)/Odin
-
-CLEANFILES = $(idlgenerated)
-
-odin_HEADERS = $(idlgenerated) _decl.h
-
-%.h: $(top_srcdir)/IDL/Odin/%.idl
-	$(IDL) -I$(top_srcdir)/IDL/Odin -H $@ $<
+dist_noinst_DATA = Interfaces.idl Errors.idl \
+	IObject.idl IFactory.idl ISupports.idl \
+	ITask.idl IMutableTask.idl \
+	IThread.idl IMutableThread.idl \
+	IVariant.idl IArray.idl IDictionary.idl IString.idl \
+	IKernel.idl IMutableKernel.idl \
+	IAllocator.idl \
+	IMemoryManager.idl \
+	IConsole.idl

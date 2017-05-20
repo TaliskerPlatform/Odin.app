@@ -62,6 +62,7 @@ fi
 AC_CONFIG_FILES([
 Makefile
 IDL/Makefile
+IDL/Odin/Makefile
 Headers/Makefile
 Headers/Odin/Makefile
 Sources/Makefile
