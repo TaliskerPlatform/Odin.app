@@ -24,7 +24,7 @@
 int
 odin_alloc_create(IKernel *kernel, IAllocator **out)
 {
-#if defined(HOST_TYPE_HOSTED)
+#if ENABLE_ODIN_MM_HOSTALLOC
 	return odin_hostmm_create_alloc(kernel, out);
 #else
 	return -E_NOENT;

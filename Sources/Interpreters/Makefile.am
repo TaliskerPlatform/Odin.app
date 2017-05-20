@@ -14,19 +14,9 @@
 ##  See the License for the specific language governing permissions and
 ##  limitations under the License.
 
-SUBDIRS = Devices MM Filesystems Interpreters .
+AM_CPPFLAGS = @AM_CPPFLAGS@ -DW_NO_UNSTABLE_INTERFACES \
+	-I${top_builddir}/Sources -I${top_srcdir}/Sources 
 
-AM_CPPFLAGS = @AM_CPPFLAGS@ -DW_NO_UNSTABLE_INTERFACES
+noinst_LIBRARIES = libinterp.a
 
-sbin_PROGRAMS = Odin
-
-Odin_SOURCES = p_Odin.h \
-	main.c odin.c mm.c alloc.c despatch.c console.c task.c thread.c \
-	user.c group.c descriptor.c subsystems.c
-
-Odin_LDADD = \
-	Devices/libdevices.a \
-	MM/libmm.a \
-	Filesystems/libfs.a \
-	Interpreters/libinterp.a
-
+libinterp_a_SOURCES = elf.c

@@ -20,13 +20,3 @@
 #endif
 
 #include "p_Odin.h"
-
-int
-odin_console_create(IKernel *kernel, IConsole **console)
-{
-#if ENABLE_ODIN_DEV_HOSTCON
-	return odin_hostcon_create(kernel, console);
-#else
-	return -E_NOENT;
-#endif
-}

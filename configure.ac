@@ -53,6 +53,12 @@ AC_SUBST([AM_CPPFLAGS])
 AC_SUBST([AM_CFLAGS])
 AC_SUBST([AM_CXXFLAGS])
 
+if test $host_type = hosted ; then
+	AC_DEFINE_UNQUOTED([ENABLE_ODIN_MM_HOSTMM], [1], [Enable the hosted memory manager])
+	AC_DEFINE_UNQUOTED([ENABLE_ODIN_MM_HOSTALLOC], [1], [Enable the hosted allocator])
+	AC_DEFINE_UNQUOTED([ENABLE_ODIN_DEV_HOSTCON], [1], [Enable the host console])
+fi
+
 AC_CONFIG_FILES([
 Makefile
 IDL/Makefile
@@ -61,6 +67,8 @@ Headers/Odin/Makefile
 Sources/Makefile
 Sources/Devices/Makefile
 Sources/MM/Makefile
+Sources/Filesystems/Makefile
+Sources/Interpreters/Makefile
 ])
 
 AC_OUTPUT

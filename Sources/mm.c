@@ -24,7 +24,7 @@
 int
 odin_mm_create(IKernel *kernel, IMemoryManager **out)
 {
-#if defined(HOST_TYPE_HOSTED)
+#if ENABLE_ODIN_MM_HOSTMM
 	return odin_hostmm_create(kernel, out);
 #else
 	return -E_NOENT;
