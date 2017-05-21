@@ -1,6 +1,6 @@
 cpp_quote("/* Odin: The Talisker nanokernel */");
 cpp_quote("");
-cpp_quote("/* Copyright 2017 Mo McRoberts.");
+cpp_quote("/* Copyright 2015 Mo McRoberts.");
 cpp_quote(" *");
 cpp_quote(" *  Licensed under the Apache License, Version 2.0 (the \"License\");");
 cpp_quote(" *  you may not use this file except in compliance with the License.");
@@ -16,21 +16,15 @@ cpp_quote(" *  limitations under the License.");
 cpp_quote(" */");
 
 import "IObject.idl";
-import "IRegion.idl";
 
 [
 	local,
 	object,
-	uuid(f037af3e-a41f-4813-b2dc-69bf96049bf2),
-	pointer_default(unique),
-	cheader("Odin/IMemoryManager.h")
+	uuid(e739ecdb-06ec-40c9-95f7-99c22a0c4a7b),
+	cheader("Odin/IRegion.h")
 ]
-interface IMemoryManager: IObject
-{	
-	cpp_quote("#ifndef W_NO_UNSTABLE_INTERFACES");
-	cpp_quote("# warning The IMemoryManager interface is currently considered unstable; source and binary compatibility is not assured.");
-	cpp_quote("#endif");
-	
-	/* Locate the region which includes the address <ptr> */
-	int regionFromPointer([in] void *ptr, [out] IRegion **region);
+interface IRegion: IObject
+{
+	/* Attempt to obtain interface <riid> from the region's owner */
+	int queryOwnerInterface([in] const uuid_t riid, [out, iid_is(riid)] void **ptr);
 }

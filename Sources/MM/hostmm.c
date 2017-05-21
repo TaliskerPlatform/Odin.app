@@ -45,14 +45,21 @@ union HostMM
 	} data;
 };
 
+/* IObject */
+
 static int odin_hostmm_queryinterface_(IMemoryManager *self, const uuid_t riid, void **ptr);
 static int32_t odin_hostmm_retain_(IMemoryManager *self);
 static int32_t odin_hostmm_release_(IMemoryManager *self);
 
+/* IMemoryManager */
+
+static int odin_hostmm_regionforptr_(IMemoryManager *self, void *ptr, IRegion **out);
+
 static struct IMemoryManager_vtable_ odin_hostmm_vtable_ = {
 	odin_hostmm_queryinterface_,
 	odin_hostmm_retain_,
-	odin_hostmm_release_
+	odin_hostmm_release_,
+	odin_hostmm_regionforptr_
 };
 
 static HostMM odin_hostmm;
@@ -102,6 +109,19 @@ odin_hostmm_release_(IMemoryManager *self)
 	
 	/* HostMM is a singleton */
 	return 1;
+}
+
+static int
+odin_hostmm_regionforptr_(IMemoryManager *self, void *ptr, IRegion **out)
+{
+	HostMM *me = INTF_TO_CLASS(self);
+
+	(void) ptr;
+	(void) me;
+	
+	*out = NULL;
+
+	return -E_NOENT;
 }
 
 #endif /*HOST_TYPE_HOSTED*/

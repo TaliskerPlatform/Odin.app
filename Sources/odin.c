@@ -52,6 +52,8 @@ static int32_t odin_retain_(IMutableKernel *kernel);
 static int32_t odin_release_(IMutableKernel *kernel);
 static int odin_mm_(IMutableKernel *kernel, IMemoryManager **mm);
 static int odin_allocator_(IMutableKernel *kernel, IAllocator **allocator);
+static void *odin_alloc_(IMutableKernel *kernel, size_t nbytes);
+static int odin_free_(IMutableKernel *kernel, void *ptr);
 static int odin_panic_(IMutableKernel *kernel, const char *message);
 static int odin_console_(IMutableKernel *kernel, IConsole **console);
 static int odin_createtask_(IMutableKernel *kernel, IMutableTask **task);
@@ -67,6 +69,8 @@ static struct IMutableKernel_vtable_ odin_vtable =
 	/* IKernel */
 	odin_mm_,
 	odin_allocator_,
+	odin_alloc_,
+	odin_free_,
 	/* IMutableKernel */
 	odin_panic_,
 	odin_console_,
@@ -152,6 +156,48 @@ odin_allocator_(IMutableKernel *kernel, IAllocator **allocator)
 	IAllocator_retain(me->data.allocator);
 	*allocator = me->data.allocator;
 	return E_SUCCESS;
+}
+
+static void *
+odin_alloc_(IMutableKernel *kernel, size_t nbytes)
+{
+	Odin *me = INTF_TO_CLASS(kernel);
+	void *ptr;
+	
+	if(!me->data.allocator)
+	{
+		return NULL;
+	}
+	ptr = IAllocator_alloc(me->data.allocator, nbytes);
+	
+	return ptr;
+}
+
+static int
+odin_free_(IMutableKernel *kernel, void *ptr)
+{
+	Odin *me = INTF_TO_CLASS(kernel);
+	IRegion *region;
+	IAllocator *alloc;
+	int r;
+	
+	if(!me->data.mm)
+	{
+		return -E_NOENT;
+	}
+	if((r = IMemoryManager_regionFromPointer(me->data.mm, ptr, &region)))
+	{
+		return r;
+	}
+	if((r = IRegion_queryOwnerInterface(region, IID_IAllocator, (void **) &alloc)))
+	{
+		IRegion_release(region);
+		return r;
+	}
+	IRegion_release(region);
+	IAllocator_free(alloc, ptr);
+	IAllocator_release(alloc);
+	return r;
 }
 
 static int 

@@ -54,6 +54,8 @@ DECLARE_INTERFACE_(IMutableKernel, IKernel)
 	/* IKernel */
 	STDMETHOD_(int, mm)(THIS_ IMemoryManager **intf) PURE;
 	STDMETHOD_(int, allocator)(THIS_ IAllocator **intf) PURE;
+	STDMETHOD_(void*, alloc)(THIS_ size_t nbytes) PURE;
+	STDMETHOD_(int, free)(THIS_ void *ptr) PURE;
 # endif /*!__cplusplus*/
 
 	/* IMutableKernel */
@@ -70,6 +72,8 @@ DECLARE_INTERFACE_(IMutableKernel, IKernel)
 #   define IMutableKernel_release(__this) __this->lpVtbl->release(__this)
 #   define IMutableKernel_mm(__this, intf) __this->lpVtbl->mm(__this, intf)
 #   define IMutableKernel_allocator(__this, intf) __this->lpVtbl->allocator(__this, intf)
+#   define IMutableKernel_alloc(__this, nbytes) __this->lpVtbl->alloc(__this, nbytes)
+#   define IMutableKernel_free(__this, ptr) __this->lpVtbl->free(__this, ptr)
 #   define IMutableKernel_panic(__this, message) __this->lpVtbl->panic(__this, message)
 #   define IMutableKernel_console(__this, cons) __this->lpVtbl->console(__this, cons)
 #   define IMutableKernel_createTask(__this, task) __this->lpVtbl->createTask(__this, task)

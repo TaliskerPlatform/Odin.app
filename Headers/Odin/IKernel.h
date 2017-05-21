@@ -53,6 +53,8 @@ DECLARE_INTERFACE_(IKernel, IObject)
 	/* IKernel */
 	STDMETHOD_(int, mm)(THIS_ IMemoryManager **intf) PURE;
 	STDMETHOD_(int, allocator)(THIS_ IAllocator **intf) PURE;
+	STDMETHOD_(void*, alloc)(THIS_ size_t nbytes) PURE;
+	STDMETHOD_(int, free)(THIS_ void *ptr) PURE;
 
 	END_INTERFACE
 };
@@ -63,6 +65,8 @@ DECLARE_INTERFACE_(IKernel, IObject)
 #   define IKernel_release(__this) __this->lpVtbl->release(__this)
 #   define IKernel_mm(__this, intf) __this->lpVtbl->mm(__this, intf)
 #   define IKernel_allocator(__this, intf) __this->lpVtbl->allocator(__this, intf)
+#   define IKernel_alloc(__this, nbytes) __this->lpVtbl->alloc(__this, nbytes)
+#   define IKernel_free(__this, ptr) __this->lpVtbl->free(__this, ptr)
 #  endif /*!__cplusplus*/
 #  undef INTERFACE
 # endif /*!__IKernel_INTERFACE_DEFINED__*/

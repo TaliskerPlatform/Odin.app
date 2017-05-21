@@ -21,7 +21,7 @@ idlgenerated = Interfaces.h Errors.h \
 	IVariant.h IArray.h IDictionary.h IString.h \
 	IKernel.h IMutableKernel.h \
 	IAllocator.h \
-	IMemoryManager.h \
+	IRegion.h IMemoryManager.h \
 	IConsole.h
 
 odindir = $(includedir)/Odin

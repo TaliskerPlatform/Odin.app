@@ -25,6 +25,7 @@ typedef struct IMemoryManager IMemoryManager;
  *  limitations under the License.
  */
 # include <Odin/IObject.h>
+# include <Odin/IRegion.h>
 
 /* IMemoryManager version 0.0 */
 
@@ -49,6 +50,7 @@ DECLARE_INTERFACE_(IMemoryManager, IObject)
 # endif /*!__cplusplus*/
 
 	/* IMemoryManager */
+	STDMETHOD_(int, regionFromPointer)(THIS_ void *ptr, IRegion **region) PURE;
 
 	END_INTERFACE
 };
@@ -57,6 +59,7 @@ DECLARE_INTERFACE_(IMemoryManager, IObject)
 #   define IMemoryManager_queryInterface(__this, riid, object) __this->lpVtbl->queryInterface(__this, riid, object)
 #   define IMemoryManager_retain(__this) __this->lpVtbl->retain(__this)
 #   define IMemoryManager_release(__this) __this->lpVtbl->release(__this)
+#   define IMemoryManager_regionFromPointer(__this, ptr, region) __this->lpVtbl->regionFromPointer(__this, ptr, region)
 #  endif /*!__cplusplus*/
 #  undef INTERFACE
 # endif /*!__IMemoryManager_INTERFACE_DEFINED__*/

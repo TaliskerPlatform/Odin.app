@@ -21,5 +21,5 @@ dist_noinst_DATA = Interfaces.idl Errors.idl \
 	IVariant.idl IArray.idl IDictionary.idl IString.idl \
 	IKernel.idl IMutableKernel.idl \
 	IAllocator.idl \
-	IMemoryManager.idl \
+	IRegion.idl IMemoryManager.idl \
 	IConsole.idl
